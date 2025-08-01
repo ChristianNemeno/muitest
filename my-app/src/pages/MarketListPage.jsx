@@ -1,47 +1,27 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import ProductCard from '../components/ProductCard';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
+const products = Array.from({ length: 15 }, (_, i) => ({
+  image: 'https://via.placeholder.com/180x120?text=Product+' + (i + 1),
+  title: `Product ${i + 1}`,
+  description: `Description for product ${i + 1}`,
 }));
 
-export default function BasicGrid() {
+export default function MarketListPage() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <Item>size=8</Item>
-        </Grid>
-        <Grid size={4}>
-          <Item>size=4</Item>
-        </Grid>
-        <Grid size={4}>
-          <Item>size=4</Item>
-        </Grid>
-        <Grid size={8}>
-          <Item>size=8</Item>
-        </Grid>
-        <Grid size={4}>
-          <Item>size=4</Item>
-        </Grid>
-        <Grid size={3}>
-          <Item>size=3</Item>
-        </Grid>
-      </Grid>
-      <Grid>
-        <Grid size={3}>
-          <Item>NEW</Item>
-        </Grid>
+    <Box sx={{ flexGrow: 2, backgroundColor: '#ffe4ec', minHeight: '50vh', py: 4 }}>
+      <Grid container spacing={5}>
+        {products.map((product, idx) => (
+          <Grid item xs={12} sm={4} md={4} key={idx}>
+            <ProductCard
+              image={product.image}
+              title={product.title}
+              description={product.description}
+            />
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
